@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ContactContext from "../../context/contact/contactContext";
 import ContactItem from "./ContactItem";
 
@@ -8,18 +9,24 @@ const Contacts = () => {
   const { contacts, filtered } = contactContext;
 
   if (contacts.length < 1) {
-    return <h4>You don't have any contacts yet.</h4>;
+    return <h4>You don't have any contacts.</h4>;
   }
 
   return (
     <>
-      {filtered
-        ? filtered.map((contact) => (
-            <ContactItem key={contact.id} contact={contact}></ContactItem>
-          ))
-        : contacts.map((contact) => (
-            <ContactItem key={contact.id} contact={contact}></ContactItem>
-          ))}
+      <TransitionGroup>
+        {filtered
+          ? filtered.map((contact) => (
+              <CSSTransition key={contact.id} timeout={300} classNames="item">
+                <ContactItem contact={contact}></ContactItem>
+              </CSSTransition>
+            ))
+          : contacts.map((contact) => (
+              <CSSTransition key={contact.id} timeout={300} classNames="item">
+                <ContactItem contact={contact}></ContactItem>
+              </CSSTransition>
+            ))}
+      </TransitionGroup>
     </>
   );
 };
