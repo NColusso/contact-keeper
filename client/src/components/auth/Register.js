@@ -14,6 +14,7 @@ const Register = (props) => {
     }
     if (error) {
       setAlert(error, "danger");
+      clearErrors();
     }
   }, [error, isAuthenticated, props.history]);
 
