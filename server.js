@@ -11,11 +11,6 @@ connectDB();
 // Initialize middleware
 app.use(express.json({ extended: false }));
 
-// FOR DEVELOPMENT
-// app.get("/", (req, res) =>
-//   res.json({ msg: "Welcome to the contact keeper API :)" })
-// );
-
 // Routes
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
