@@ -10,6 +10,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      // send to home page if authenticated
       props.history.push("/");
     }
     if (error) {
@@ -29,6 +30,7 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // inputs are required so should not hit 'if' route
     if (!email || !password) {
       setAlert("Please enter all fields", "danger");
     } else {

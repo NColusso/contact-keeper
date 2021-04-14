@@ -29,6 +29,7 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.filter(
+          // filter contact list to show those that don't match the deleted contacts' ID
           (contact) => contact._id !== action.payload
         ),
         loading: false,
@@ -45,7 +46,8 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.map((contact) =>
-          contact.id === action.payload.id ? action.payload : contact
+          // Going through contacts if it is the one being updated replace otherwise return as-is
+          contact._id === action.payload._id ? action.payload : contact
         ),
         loading: false,
       };
@@ -63,6 +65,7 @@ export default (state, action) => {
       return {
         ...state,
         filtered: state.contacts.filter((contact) => {
+          // search for value being filtered for either in the contact name or email
           const regex = new RegExp(`${action.payload}`, "gi");
           return contact.name.match(regex) || contact.email.match(regex);
         }),

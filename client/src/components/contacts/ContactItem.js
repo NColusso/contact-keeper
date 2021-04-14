@@ -24,6 +24,7 @@ const ContactItem = ({ contact }) => {
             (type === "professional" ? "badge-success" : "badge-primary")
           }
         >
+          {/* First letter uppercase */}
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>

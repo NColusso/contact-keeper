@@ -13,6 +13,9 @@ const ContactForm = () => {
     type: "personal",
   };
 
+  const [contact, setContact] = useState(initialContact);
+
+  // if a contact is selected, fill contact creation box with that contact otherwise blank
   useEffect(() => {
     if (current) {
       setContact(current);
@@ -21,8 +24,6 @@ const ContactForm = () => {
     }
   }, [contactContext, current]);
 
-  const [contact, setContact] = useState(initialContact);
-
   const { name, email, phone, type } = contact;
 
   const onChange = (e) =>
@@ -30,16 +31,13 @@ const ContactForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // IF - creating new | ELSE = Updating
     if (!current) {
       addContact(contact);
       setContact(initialContact);
     } else {
       updateContact(contact);
     }
-  };
-
-  const clearAll = () => {
-    clearCurrent();
   };
 
   return (
@@ -94,7 +92,10 @@ const ContactForm = () => {
       </div>
       {current && (
         <div>
-          <button className="btn btn-light btn-block" onClick={clearAll}>
+          <button
+            className="btn btn-light btn-block"
+            onClick={(e) => clearCurrent()}
+          >
             Cancel
           </button>
         </div>

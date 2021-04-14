@@ -10,6 +10,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      // send to home page if authenticated
       props.history.push("/");
     }
     if (error) {
@@ -29,7 +30,7 @@ const Register = (props) => {
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  // onSubmit should not hit the if statements with setAlerts due to requirements added on inputs.
+  // onSubmit should not hit the if statements due to requirements added on inputs.
   const onSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
